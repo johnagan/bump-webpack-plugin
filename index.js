@@ -2,7 +2,7 @@ var fs = require('fs');
 var path = require('path');
 var join = path.join;
 
-function Plugin(files) {
+function Plugin(files, doPreBump) {
   this.context = path.dirname(module.parent.filename);
 
   // allows for a single string entry
@@ -11,13 +11,15 @@ function Plugin(files) {
   } else {
     this.files = files || [];
   }
-
+  this.preBump = doPreBump === true;
 }
 
 // hook into webpack
 Plugin.prototype.apply = function(compiler) {
   var self = this;
-  return compiler.plugin('done', function() {
+  var compilerStage = this.preBump ? 'compile' : 'done';
+  console.log('++++++++++++++++++++++++++++++++++ compilerStage=', compilerStage);
+  return compiler.plugin(compilerStage, function() {
     self.files.forEach(function(file){
       var file = join(self.context, file);
       var json = self.increment(file);
