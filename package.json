@@ -1,6 +1,6 @@
 {
   "name": "bump-webpack-plugin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "John Agan <johnagan@github.com>",
   "description": "A webpack plugin to bump the patch number every build",
   "homepage": "https://github.com/johnagan/bump-webpack-plugin",
